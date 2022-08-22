@@ -574,14 +574,14 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
      * _tag_indent() is called.
      */
     protected $indent = [
-            'ol' => array("\n","\n"),  '/ol' => array('',"\n"),
-            'ul' => array("\n","\n"),  '/ul' => array('',"\n"),
-            'dl' => array("\n","\n"),  '/dl' => array('',"\n"),
-            'li' => array('  ',''),    '/li' => array('',"\n"),
-            'dt' => array('  ',''),    '/dt' => array('',"\n"),
-            'dd' => array('  ',"\n"),  '/dd' => array('',"\n"),
-            'p'  => array("\n",''),    '/p'  => array('',"\n"),
-            'div' => array("\n",''),   '/div' => array('',"\n"),
+            'ol'  => [NL,NL],   '/ol'  => ['',NL],
+            'ul'  => [NL,NL],   '/ul'  => ['',NL],
+            'dl'  => [NL,NL],   '/dl'  => ['',NL],
+            'li'  => ['  ',''], '/li'  => ['',NL],
+            'dt'  => ['  ',''], '/dt'  => ['',NL],
+            'dd'  => ['  ',NL], '/dd'  => ['',NL],
+            'p'   => [NL,''],   '/p'   => ['',NL],
+            'div' => [NL,''],   '/div' => ['',NL],
         ];
 
     /**
@@ -595,7 +595,7 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
         if (array_key_exists($tag, $this->indent))
             return $this->indent[$tag];
 
-        return array('', '');
+        return ['', ''];
     }
 
 }
