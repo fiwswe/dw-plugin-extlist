@@ -21,19 +21,19 @@ Lists can be nested within lists, just as in the standard DokuWiki syntax.
   ; term  : need two spaces before ":" when writing dt/dd pair in one line
 ```
 
-Ordered list also starts with actual number followed by period and space (`". "`):
+Ordered list items can also start with actual number followed by period and space (`". "`):
 
 ```
-    100. start from hundred
-    105. skip 101 to 104
+  100. start from hundred
+  105. skip 101 to 104
 ```
 
 You may write longer list items in consecutive indented lines of text:
 
 ```
-    * Lorem ipsum dolor sit amet, consectetur 
-      adipiscing elit, sed do eiusmod tempor 
-      incididunt ut labore et dolore magna aliqua.
+  * Lorem ipsum dolor sit amet, consectetur 
+    adipiscing elit, sed do eiusmod tempor 
+    incididunt ut labore et dolore magna aliqua.
 ```
 
 
