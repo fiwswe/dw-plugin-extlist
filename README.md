@@ -1,13 +1,13 @@
 Extended List for DokuWiki
 ==========================
 
-This plugin extends DokuWiki's list markup syntax to allow:  
+This plugin extends [DokuWiki](https://dokuwiki.org)'s list markup syntax to allow:  
  &ensp;1) html5 description lists, as well as ordered/unordered lists  
  &ensp;2) start any number of an ordered list and give any number for member items  
  &ensp;3) break long item into multiple lines indented by at least two spaces  
  &ensp;4) class attribute for lists block  
 
-Lists can be nested within lists, just as in the standard DokuWiki syntax.
+Lists can be nested within lists, just as in the standard [DokuWiki syntax](https://www.dokuwiki.org/wiki:syntax).
 
 
 ```
