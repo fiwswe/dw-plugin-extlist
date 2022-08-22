@@ -584,8 +584,12 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
             'dt' => array("  ",""),    '/dt' => array("","\n"),
             'dd' => array("  ","\n"),  '/dd' => array("","\n"),
             'p'  => array("\n",""),    '/p'  => array("","\n"),
+            'div'  => array("\n",""),    '/div'  => array("","\n"),
         );
-        return $indent[$tag];
+        if (array_key_exists($tag, $indent))
+            return $indent[$tag];
+
+        return array("", "");
     }
 
 }
