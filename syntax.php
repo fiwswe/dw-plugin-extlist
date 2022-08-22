@@ -201,7 +201,7 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
     }
 
     /**
-     * srore class attribute for lists [ul|ol|dl] specfied by macro pattern
+     * store class attribute for lists [ul|ol|dl] specfied by macro pattern
      * macro_pattern = ~~(?:dl|ol|ul):[\w -]*?~~
      */
     private function storeListClass($str)
@@ -584,7 +584,7 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
             'dt' => array("  ",""),    '/dt' => array("","\n"),
             'dd' => array("  ","\n"),  '/dd' => array("","\n"),
             'p'  => array("\n",""),    '/p'  => array("","\n"),
-            'div'  => array("\n",""),    '/div'  => array("","\n"),
+            'div' => array("\n",""),   '/div' => array("","\n"),
         );
         if (array_key_exists($tag, $indent))
             return $indent[$tag];
