@@ -68,7 +68,7 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
     protected $olist_level = 0;
     protected $olist_info = [];
 
-    protected $use_div = true;
+    protected $use_div = true;  // ??? Not sure why this is here?
 
 
 
@@ -160,6 +160,14 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
     /**
      * get markup and depth from the match
      *
+     * The returned array contains the following elements:
+     *   depth: The indent level of the list
+     *   mk:   List item kind
+     *   list: Type of list (ul, ol, dl)
+     *   item: Type of list item (li, dt, dd, null)
+     *   num:  For ordered lists the starting item number (optional)
+     *   p:    If present surround list item sith paragraphs
+     *
      * @param $match string 
      * @return array
      */
@@ -173,24 +181,25 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
 
         // check order list markup with number
         if (preg_match('/^(-?\d+)([.:])/', $match, $matches)) {
-            $m += [
-                    'mk' => ($matches[2] == '.') ? '-' : '-:',
-                    'list' => 'ol',
-                    'item' => 'li',
-                    'num' => $matches[1]
+            $m += ['mk' => ($matches[2] == '.') ? '-' : '-:',
+                   'list' => 'ol',
+                   'item' => 'li',
+                   'num' => $matches[1]
                   ];
             if ($matches[2] == ':') $m += ['p' => 1];
         } else {
-            $m += ['mk' => $match];
+            $m += ['mk' => $match,
+                   'num' => null   // Fix PHP warnings when this element is assumed to be present later
+                  ];
 
             switch (substr($match, 0, 1)) {
                 case '' :
-                    $m += ['list' => NULL,
-                           'item' => NULL];
+                    $m += ['list' => null,
+                           'item' => null];
                     break;
                 case '+':
-                    $m += ['list' => NULL,
-                           'item' => NULL];
+                    $m += ['list' => null,
+                           'item' => null];
                     if ($match == '+:') {
                         $m += ['p' => 1];
                     } else {
@@ -239,7 +248,6 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
     {
         $num = $this->olist_info[$level];
         //error_log('olist lv='.$level.' list_class='.$this->list_class['ol'].' num='.$num);
-        if (!is_int($num)) $num = 0;
 
         // Parenthesized latin small letter marker: ⒜,⒝,⒞, … ,⒵
         if (strpos($this->list_class['ol'] ?? '', 'alphabet') !== false) {
@@ -332,10 +340,9 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
             case '-':
             case '-:':
                 // prepare hierarchical marker for nested ordered list item
-                $m['num'] ??= '';
                 $this->olist_info[$this->olist_level] = $m['num'];
                 $lv = $this->olist_level;
-                $attr = ' value="'.$m['num'].'"';
+                $attr = isset($m['num']) ? ' value="'.$m['num'].'"' : '';
                 $attr .= ' data-marker="'.$this->olist_marker($lv).'"';
                 break;
             case ';':
@@ -567,10 +574,10 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
 
                 // open list [ul|ol|dl] if necessary
                 if (($m0['depth'] < $m1['depth']) || (isset($m0['num']) && ($m0['num'] === 0))) {
-                    if (isset($m1['num']) && !is_numeric($m1['num'])) $m1['num'] = 1;
+                    if (!is_numeric($m1['num'] ?? null)) $m1['num'] = 1;
                     $this->_openList($m1, $pos, $match, $handler);
                 } else {
-                    if (isset($m1['num']) && !is_numeric($m1['num'])) $m1['num'] = $m0['num']  +1;
+                    if (!is_numeric($m1['num'] ?? null)) $m1['num'] = $m0['num'] + 1;
                 }
 
                 // open item [li|dt|dd]
