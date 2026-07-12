@@ -239,10 +239,11 @@ class syntax_plugin_extlist extends DokuWiki_Syntax_Plugin
     {
         $num = $this->olist_info[$level];
         //error_log('olist lv='.$level.' list_class='.$this->list_class['ol'].' num='.$num);
+        if (!is_int($num)) $num = 0;
 
         // Parenthesized latin small letter marker: ⒜,⒝,⒞, … ,⒵
-        if (strpos($this->list_class['ol'] ?? '', 'alphabet') !== false){
-            $modulus = ($num -1) % 26;
+        if (strpos($this->list_class['ol'] ?? '', 'alphabet') !== false) {
+            $modulus = ($num - 1) % 26;
             $marker = '&#'.(9372 + $modulus).';';
             return $marker;
         }
