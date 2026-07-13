@@ -114,3 +114,12 @@ ol.counter {
   }
 }
 
+/* Fix: https://github.com/ssahara/dw-plugin-extlist/issues/5 */
+.extlist pre.code {
+  ol {
+    list-style: decimal;
+  }
+  ol li {
+    display: list-item;
+  }
+}
