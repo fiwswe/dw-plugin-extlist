@@ -18,12 +18,12 @@ ol.hierarchical {
   & > li {
     display: table;
     counter-increment: item;
-    margin-bottom: 0.6em;
+    margin-bottom: .6em;
   }
   & > li::before {
     content: counters(item, ".") ". ";
     display: table-cell;
-    padding-right: 0.6em;
+    padding-right: .6em;
   }
   //## ExtList plugin
   & > li[data-marker]::before {
@@ -81,7 +81,7 @@ ol.number {
   & > li[value]::before {
     content: "(" attr(value) ")";
     display: table-cell;
-    padding-right: 0.6em;
+    padding-right: .6em;
     color: #696969;
   }
 }
