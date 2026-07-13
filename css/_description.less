@@ -15,9 +15,13 @@ div.wrap_box {
     }
   }
 }
+dl dd p {
+  margin-top: 0.2em;
+  margin-bottom: 0;
+}
 dl.generic {
-  margin: 0.4em 0;
-  padding: 1px 0 0.5em 0;
+  margin: .4em 0;
+  padding: 1px 0 .5em 0;
   border-bottom: 1px dotted #bbb;
   &::after {
     content: "";
@@ -29,58 +33,51 @@ dl.generic {
   dd {
     position: relative;
     margin-left: 10.6em;
-    margin-top: 0.5em;
-    // background-color: rgba(0,0,255,0.1);
+    margin-top: .5em;
+    margin-bottom: .5em;
+    // background-color: rgba(0,0,255,.1);
   }
   dt {
     position: relative;
-    margin-top: 0.5em;
+    margin-top: 0;
     font-weight: normal;
     text-shadow: 1px 1px 3px rgba(0,0,0,.2);
-    &:not(.compact) {
-      padding-top: 0.5em;
-      padding-left: 0.2em;
-      // background-color: rgba(255,0,0,0.1);
-
-      &:after {
-        display: block;
-        position: absolute;
-        content: "◸";
-        top: 0em;
-        left: -0.5em;
-        color: #bbb;
-        font-size: x-small;
-      }
-
-    }
-    &:first-child {
-      border-top: 1px dotted #bbb;
-    }
-  }
-  dt.compact {
     span {
-      display: inline-block;
-      position: relative;
-      margin-top: 0.5em;
-      padding-left: 0.2em;
-      // background-color: rgba(255,0,0,0.1);
-      clear: left;
-      float: left;
-      max-width: 9em;
+        display: inline-block;
+        position: relative;
+        margin-top: .5em;
+        padding-left: .2em;
 
-      &::after {
-        display: block;
-        position: absolute;
-        content: "◸";
-        top: 0em;
-        left: -0.5em;
-        color: #bbb;
-        font-size: x-small;
+        &::after { // ??? ::after?
+          display: block;
+          position: absolute;
+          content: "◸";
+          top: 0em;
+          left: -.5em;
+          color: #bbb;
+          font-size: x-small;
+   	    }
+    }
+    &.compact {
+      span {
+        clear: left;
+        float: left;
+        max-width: 9em;
       }
-
+    }
+    &:has(+dt) {
+      margin-bottom: 0 !important;
+    }
+    &+dt {
+      border-top-style: none;
     }
   }
   dd+dt {
+    border-top: 1px dotted #bbb;
+    margin-bottom: .5em;
+    clear: left;
+  }
+  &>dt {
     border-top: 1px dotted #bbb;
   }
 }
